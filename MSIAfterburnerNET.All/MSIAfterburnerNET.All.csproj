@@ -2,8 +2,9 @@
 
   <!-- Project Info -->
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
 
   <!-- Assembly Info -->
@@ -67,12 +68,9 @@
     <Delete Files="$(TargetDir)$(TargetName).$(Version).nuspec" />
 
     <!-- Create the other packages -->
-    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.Common"
-          Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.Common.csproj" />
-    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.HM"
-          Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.HM.csproj" />
-    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.CM"
-          Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.CM.csproj" />
+    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.Common" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.Common.csproj" />
+    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.HM" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.HM.csproj" />
+    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.CM" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.CM.csproj" />
   </Target>
   
 </Project>
