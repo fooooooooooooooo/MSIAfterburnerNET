@@ -42,12 +42,12 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ApplicationIcon />
-    <StartupObject />
+    <ApplicationIcon/>
+    <StartupObject/>
   </PropertyGroup>
 
   <!-- REFERENCES -->
   <ItemGroup>
-    <ProjectReference Include="..\MSIAfterburnerNET.Common\MSIAfterburnerNET.Common.csproj" />
+    <ProjectReference Include="..\MSIAfterburnerNET.Common\MSIAfterburnerNET.Common.csproj"/>
   </ItemGroup>
 </Project>

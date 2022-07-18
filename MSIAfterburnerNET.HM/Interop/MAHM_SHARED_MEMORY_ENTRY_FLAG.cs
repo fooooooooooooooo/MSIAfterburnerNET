@@ -1,13 +1,13 @@
 ﻿using System;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.HM.Interop
-{
-    [Flags]
-    public enum MAHM_SHARED_MEMORY_ENTRY_FLAG : uint
-    {
-        None = 0,
-        SHOW_IN_OSD = 0x00000001,
-        SHOW_IN_LCD = 0x00000002,
-        SHOW_IN_TRAY = 0x00000004
-    }
+namespace MSIAfterburnerNET.HM.Interop;
+
+[Flags]
+[PublicAPI]
+public enum MAHM_SHARED_MEMORY_ENTRY_FLAG : uint {
+  None = 0,
+  ShowInOsd = 0x00000001,
+  ShowInLcd = 0x00000002,
+  ShowInTray = 0x00000004,
 }

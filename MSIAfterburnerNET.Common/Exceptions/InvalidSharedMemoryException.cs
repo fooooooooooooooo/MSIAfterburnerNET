@@ -1,25 +1,17 @@
 ﻿using System;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.Common.Exceptions
-{
-    public class InvalidSharedMemoryException : Exception
-    {
-        private const string MSG = "Connected to invalid MSI Afterburner shared memory.";
+namespace MSIAfterburnerNET.Common.Exceptions;
 
-        public InvalidSharedMemoryException() : base(MSG)
-        {
-        }
+[PublicAPI]
+public class InvalidSharedMemoryException : Exception {
+  private const string InvalidMessage = "Connected to invalid MSI Afterburner shared memory.";
 
-        public InvalidSharedMemoryException(Exception innerException) : base(MSG, innerException)
-        {
-        }
+  public InvalidSharedMemoryException() : base(InvalidMessage) { }
 
-        public InvalidSharedMemoryException(string message) : base(message)
-        {
-        }
+  public InvalidSharedMemoryException(Exception innerException) : base(InvalidMessage, innerException) { }
 
-        public InvalidSharedMemoryException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
+  public InvalidSharedMemoryException(string message) : base(message) { }
+
+  public InvalidSharedMemoryException(string message, Exception innerException) : base(message, innerException) { }
 }

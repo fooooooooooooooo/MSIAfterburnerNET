@@ -42,8 +42,8 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ApplicationIcon />
-    <StartupObject />
+    <ApplicationIcon/>
+    <StartupObject/>
   </PropertyGroup>
 
   <!-- Build Configurations -->
@@ -60,6 +60,9 @@
 
   <!-- REFERENCES -->
   <ItemGroup>
-    <ProjectReference Include="..\MSIAfterburnerNET.Common\MSIAfterburnerNET.Common.csproj" />
+    <ProjectReference Include="..\MSIAfterburnerNET.Common\MSIAfterburnerNET.Common.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0"/>
   </ItemGroup>
 </Project>

@@ -38,8 +38,8 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ApplicationIcon />
-    <StartupObject />
+    <ApplicationIcon/>
+    <StartupObject/>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -47,30 +47,30 @@
 
   <!-- REFERENCES -->
   <ItemGroup>
-    <ProjectReference Include="..\MSIAfterburnerNET.CM\MSIAfterburnerNET.CM.csproj" />
-    <ProjectReference Include="..\MSIAfterburnerNET.HM\MSIAfterburnerNET.HM.csproj" />
+    <ProjectReference Include="..\MSIAfterburnerNET.CM\MSIAfterburnerNET.CM.csproj"/>
+    <ProjectReference Include="..\MSIAfterburnerNET.HM\MSIAfterburnerNET.HM.csproj"/>
   </ItemGroup>
 
   <!-- BUILD EVENTS -->
   <Target Name="PostPack" AfterTargets="Pack">
     <ItemGroup>
-      <FilesToDelete Include="$(TargetDir)*" />
+      <FilesToDelete Include="$(TargetDir)*"/>
     </ItemGroup>
 
-    <Message Text="[POST-PACK]" Importance="high" />
-    <DownloadFile Condition="!Exists('$(ProjectDir)nuget.exe')" SourceUrl="https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" DestinationFolder="$(ProjectDir)" />
-    <Delete Files="@(FilesToDelete)" />
+    <Message Text="[POST-PACK]" Importance="high"/>
+    <DownloadFile Condition="!Exists('$(ProjectDir)nuget.exe')" SourceUrl="https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" DestinationFolder="$(ProjectDir)"/>
+    <Delete Files="@(FilesToDelete)"/>
 
     <!-- Create a meta-package -->
-    <Exec Command="powershell -File &quot;$(ProjectDir)nuspec.ps1&quot; &quot;$(ProjectDir)obj\$(Configuration)\$(TargetName).$(Version).nuspec&quot;" />
-    <Copy SourceFiles="$(ProjectDir)obj\$(Configuration)\$(TargetName).$(Version).nuspec" DestinationFolder="$(TargetDir)" />
-    <Exec WorkingDirectory="$(TargetDir)" Command="&quot;$(ProjectDir)nuget.exe&quot; pack &quot;$(TargetName).$(Version).nuspec&quot; -Properties Configuration=$(Configuration)" />
-    <Delete Files="$(TargetDir)$(TargetName).$(Version).nuspec" />
+    <Exec Command="powershell -File &quot;$(ProjectDir)nuspec.ps1&quot; &quot;$(ProjectDir)obj\$(Configuration)\$(TargetName).$(Version).nuspec&quot;"/>
+    <Copy SourceFiles="$(ProjectDir)obj\$(Configuration)\$(TargetName).$(Version).nuspec" DestinationFolder="$(TargetDir)"/>
+    <Exec WorkingDirectory="$(TargetDir)" Command="&quot;$(ProjectDir)nuget.exe&quot; pack &quot;$(TargetName).$(Version).nuspec&quot; -Properties Configuration=$(Configuration)"/>
+    <Delete Files="$(TargetDir)$(TargetName).$(Version).nuspec"/>
 
     <!-- Create the other packages -->
-    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.Common" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.Common.csproj" />
-    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.HM" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.HM.csproj" />
-    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.CM" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.CM.csproj" />
+    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.Common" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.Common.csproj"/>
+    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.HM" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.HM.csproj"/>
+    <Exec WorkingDirectory="$(SolutionDir)MSIAfterburnerNET.CM" Command="dotnet pack --nologo -o &quot;$(TargetDir.TrimEnd('\'))&quot; --no-build --include-symbols -c $(Configuration) MSIAfterburnerNET.CM.csproj"/>
   </Target>
-  
+
 </Project>

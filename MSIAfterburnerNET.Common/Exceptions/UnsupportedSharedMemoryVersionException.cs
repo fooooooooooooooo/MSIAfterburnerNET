@@ -1,25 +1,17 @@
 ﻿using System;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.Common.Exceptions
-{
-    public class UnsupportedSharedMemoryVersionException : Exception
-    {
-        private const string MSG = "Connected to an unsupported version of MSI Afterburner shared memory.";
+namespace MSIAfterburnerNET.Common.Exceptions;
 
-        public UnsupportedSharedMemoryVersionException() : base(MSG)
-        {
-        }
+[PublicAPI]
+public class UnsupportedSharedMemoryVersionException : Exception {
+  private const string UnsupportedMessage = "Connected to an unsupported version of MSI Afterburner shared memory.";
 
-        public UnsupportedSharedMemoryVersionException(Exception innerException) : base(MSG, innerException)
-        {
-        }
+  public UnsupportedSharedMemoryVersionException() : base(UnsupportedMessage) { }
 
-        public UnsupportedSharedMemoryVersionException(string message) : base(message)
-        {
-        }
+  public UnsupportedSharedMemoryVersionException(Exception innerException) : base(UnsupportedMessage, innerException) { }
 
-        public UnsupportedSharedMemoryVersionException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
+  public UnsupportedSharedMemoryVersionException(string message) : base(message) { }
+
+  public UnsupportedSharedMemoryVersionException(string message, Exception innerException) : base(message, innerException) { }
 }

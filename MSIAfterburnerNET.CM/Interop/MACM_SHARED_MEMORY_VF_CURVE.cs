@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.CM.Interop
-{
-    [Serializable]
-    public struct MACM_SHARED_MEMORY_VF_CURVE
-    {
-        public uint version;
-        public uint flags;
-        public uint points;
+namespace MSIAfterburnerNET.CM.Interop;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-        public MACM_SHARED_MEMORY_VF_POINT_ENTRY[] vfPoints;
+[Serializable]
+[PublicAPI]
+public struct MACM_SHARED_MEMORY_VF_CURVE {
+  public uint version;
+  public uint flags;
+  public uint points;
 
-        public uint lockIndex;
-        public uint powerTuplesSize;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
+  public MACM_SHARED_MEMORY_VF_POINT_ENTRY[] vfPoints;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public MACM_SHARED_MEMORY_POWER_TUPLE_ENTRY[] powerTuples;
+  public uint lockIndex;
+  public uint powerTuplesSize;
 
-        public uint thermalTuplesSize;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+  public MACM_SHARED_MEMORY_POWER_TUPLE_ENTRY[] powerTuples;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public MACM_SHARED_MEMORY_POWER_TUPLE_ENTRY[] thermalTuples;
-    }
+  public uint thermalTuplesSize;
+
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+  public MACM_SHARED_MEMORY_POWER_TUPLE_ENTRY[] thermalTuples;
 }

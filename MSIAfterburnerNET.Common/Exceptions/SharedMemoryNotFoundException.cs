@@ -1,25 +1,17 @@
 ﻿using System;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.Common.Exceptions
-{
-    public class SharedMemoryNotFoundException : Exception
-    {
-        private const string MSG = "Could not connect to MSI Afterburner shared memory.";
+namespace MSIAfterburnerNET.Common.Exceptions;
 
-        public SharedMemoryNotFoundException() : base(MSG)
-        {
-        }
+[PublicAPI]
+public class SharedMemoryNotFoundException : Exception {
+  private const string ConnectionFailedMessage = "Could not connect to MSI Afterburner shared memory.";
 
-        public SharedMemoryNotFoundException(Exception innerException) : base(MSG, innerException)
-        {
-        }
+  public SharedMemoryNotFoundException() : base(ConnectionFailedMessage) { }
 
-        public SharedMemoryNotFoundException(string message) : base(message)
-        {
-        }
+  public SharedMemoryNotFoundException(Exception innerException) : base(ConnectionFailedMessage, innerException) { }
 
-        public SharedMemoryNotFoundException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
+  public SharedMemoryNotFoundException(string message) : base(message) { }
+
+  public SharedMemoryNotFoundException(string message, Exception innerException) : base(message, innerException) { }
 }

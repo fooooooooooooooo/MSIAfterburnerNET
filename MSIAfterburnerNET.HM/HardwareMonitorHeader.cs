@@ -1,74 +1,66 @@
-﻿using MSIAfterburnerNET.Common.Exceptions;
-using MSIAfterburnerNET.HM.Interop;
-using System;
+﻿using System;
 using System.Text;
+using JetBrains.Annotations;
+using MSIAfterburnerNET.Common.Exceptions;
+using MSIAfterburnerNET.HM.Interop;
 
-namespace MSIAfterburnerNET.HM
-{
-    public class HardwareMonitorHeader
-    {
-        public MAHM_SHARED_MEMORY_HEADER? NativeHeader { get; set; }
+namespace MSIAfterburnerNET.HM;
 
-        public HardwareMonitorHeader()
-        {
-        }
+[PublicAPI]
+public class HardwareMonitorHeader {
+  public HardwareMonitorHeader() { }
 
-        public HardwareMonitorHeader(MAHM_SHARED_MEMORY_HEADER header)
-        {
-            this.NativeHeader = header;
-        }
+  public HardwareMonitorHeader(MAHM_SHARED_MEMORY_HEADER header) { NativeHeader = header; }
+  public MAHM_SHARED_MEMORY_HEADER? NativeHeader { get; set; }
 
-        public uint Signature => this.NativeHeader?.signature ?? 0;
-        public uint Version => this.NativeHeader?.version ?? 0;
-        public uint HeaderSize => this.NativeHeader?.headerSize ?? 0;
-        public uint EntryCount => this.NativeHeader?.entryCount ?? 0;
-        public uint EntrySize => this.NativeHeader?.entrySize ?? 0;
-        public DateTime Time => new DateTime(1970, 1, 1).AddSeconds(this.NativeHeader?.time ?? 0).ToLocalTime();
-        public uint GpuEntryCount => this.NativeHeader?.gpuEntryCount ?? 0;
-        public uint GpuEntrySize => this.NativeHeader?.gpuEntrySize ?? 0;
+  public uint Signature => NativeHeader?.signature ?? 0;
+  public uint Version => NativeHeader?.version ?? 0;
+  public uint HeaderSize => NativeHeader?.headerSize ?? 0;
+  public uint EntryCount => NativeHeader?.entryCount ?? 0;
+  public uint EntrySize => NativeHeader?.entrySize ?? 0;
+  public DateTime Time => new DateTime(1970, 1, 1).AddSeconds(NativeHeader?.time ?? 0).ToLocalTime();
+  public uint GpuEntryCount => NativeHeader?.gpuEntryCount ?? 0;
+  public uint GpuEntrySize => NativeHeader?.gpuEntrySize ?? 0;
 
-        public string GetSignatureString()
-        {
-            char[] charArray = Encoding.ASCII.GetString(BitConverter.GetBytes(this.Signature)).ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
-        }
+  public string GetSignatureString() {
+    var charArray = Encoding.ASCII.GetString(BitConverter.GetBytes(Signature)).ToCharArray();
+    Array.Reverse(charArray);
+    return new string(charArray);
+  }
 
-        public string GetVersionString()
-        {
-            return $"{this.Version >> 16}.{(short)this.Version}";
-        }
+  public string GetVersionString() { return $"{Version >> 16}.{(short) Version}"; }
 
-        public void Validate()
-        {
-            if (this.GetSignatureString() != "MAHM")
-            {
-                if (this.Signature == 57005U)
-                    throw new DeadSharedMemoryException();
-                throw new InvalidSharedMemoryException();
-            }
+  public void Validate() {
+    if (GetSignatureString() != "MAHM") {
+      if (Signature == 57005U) throw new DeadSharedMemoryException();
 
-            if (this.Version < 131072U)
-                throw new UnsupportedSharedMemoryVersionException();
-        }
-
-        public override string ToString()
-        {
-            try
-            {
-                return "Signature = " + this.GetSignatureString() +
-                    ";Version = " + this.GetVersionString() +
-                    ";HeaderSize = " + this.HeaderSize +
-                    ";EntryCount = " + this.EntryCount +
-                    ";EntrySize = " + this.EntrySize +
-                    ";Time = " + this.Time.ToString("hh:mm:ss MMM-dd-yyyy") +
-                    ";GpuEntryCount = " + this.GpuEntryCount +
-                    ";GpuEntrySize = " + this.GpuEntrySize;
-            }
-            catch
-            {
-                return base.ToString();
-            }
-        }
+      throw new InvalidSharedMemoryException();
     }
+
+    if (Version < 131072U) throw new UnsupportedSharedMemoryVersionException();
+  }
+
+  public override string ToString() {
+    try {
+      return "Signature = " +
+             GetSignatureString() +
+             ";Version = " +
+             GetVersionString() +
+             ";HeaderSize = " +
+             HeaderSize +
+             ";EntryCount = " +
+             EntryCount +
+             ";EntrySize = " +
+             EntrySize +
+             ";Time = " +
+             Time.ToString("hh:mm:ss MMM-dd-yyyy") +
+             ";GpuEntryCount = " +
+             GpuEntryCount +
+             ";GpuEntrySize = " +
+             GpuEntrySize;
+    }
+    catch {
+      return base.ToString();
+    }
+  }
 }

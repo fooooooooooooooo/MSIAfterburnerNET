@@ -1,25 +1,17 @@
 ﻿using System;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.Common.Exceptions
-{
-    public class DeadSharedMemoryException : Exception
-    {
-        private const string MSG = "Connected to MSI Afterburner shared memory that is flagged as dead.";
+namespace MSIAfterburnerNET.Common.Exceptions;
 
-        public DeadSharedMemoryException() : base(MSG)
-        {
-        }
+[PublicAPI]
+public class DeadSharedMemoryException : Exception {
+  private const string DeadMessage = "Connected to MSI Afterburner shared memory that is flagged as dead.";
 
-        public DeadSharedMemoryException(Exception innerException) : base(MSG, innerException)
-        {
-        }
+  public DeadSharedMemoryException() : base(DeadMessage) { }
 
-        public DeadSharedMemoryException(string message) : base(message)
-        {
-        }
+  public DeadSharedMemoryException(Exception innerException) : base(DeadMessage, innerException) { }
 
-        public DeadSharedMemoryException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
+  public DeadSharedMemoryException(string message) : base(message) { }
+
+  public DeadSharedMemoryException(string message, Exception innerException) : base(message, innerException) { }
 }

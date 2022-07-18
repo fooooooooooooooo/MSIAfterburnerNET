@@ -1,30 +1,30 @@
 ﻿using System;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.CM.Interop
-{
-    [Flags]
-    public enum MACM_SHARED_MEMORY_GPU_ENTRY_FLAG : uint
-    {
-        None = 0,
-        CORE_CLOCK = 0x00000001,
-        SHADER_CLOCK = 0x00000002,
-        MEMORY_CLOCK = 0x00000004,
-        FAN_SPEED = 0x00000008,
-        CORE_VOLTAGE = 0x00000010,
-        MEMORY_VOLTAGE = 0x00000020,
-        AUX_VOLTAGE = 0x00000040,
-        CORE_VOLTAGE_BOOST = 0x00000080,
-        MEMORY_VOLTAGE_BOOST = 0x00000100,
-        AUX_VOLTAGE_BOOST = 0x00000200,
-        POWER_LIMIT = 0x00000400,
-        CORE_CLOCK_BOOST = 0x00000800,
-        MEMORY_CLOCK_BOOST = 0x00001000,
-        THERMAL_LIMIT = 0x00002000,
-        THERMAL_PRIORITIZE = 0x00004000,
-        AUX2_VOLTAGE = 0x00008000,
-        AUX2_VOLTAGE_BOOST = 0x00010000,
-        VF_CURVE = 0x00020000,
-        VF_CURVE_ENABLED = 0x00040000,
-        SYNCHRONIZED_WITH_MASTER = 0x80000000
-    }
+namespace MSIAfterburnerNET.CM.Interop;
+
+[Flags]
+[PublicAPI]
+public enum MACM_SHARED_MEMORY_GPU_ENTRY_FLAG : uint {
+  None = 0,
+  CoreClock = 0x00000001,
+  ShaderClock = 0x00000002,
+  MemoryClock = 0x00000004,
+  FanSpeed = 0x00000008,
+  CoreVoltage = 0x00000010,
+  MemoryVoltage = 0x00000020,
+  AuxVoltage = 0x00000040,
+  CoreVoltageBoost = 0x00000080,
+  MemoryVoltageBoost = 0x00000100,
+  AuxVoltageBoost = 0x00000200,
+  PowerLimit = 0x00000400,
+  CoreClockBoost = 0x00000800,
+  MemoryClockBoost = 0x00001000,
+  ThermalLimit = 0x00002000,
+  ThermalPrioritize = 0x00004000,
+  Aux2Voltage = 0x00008000,
+  Aux2VoltageBoost = 0x00010000,
+  VfCurve = 0x00020000,
+  VfCurveEnabled = 0x00040000,
+  SynchronizedWithMaster = 0x80000000,
 }

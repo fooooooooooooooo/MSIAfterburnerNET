@@ -1,80 +1,71 @@
-﻿using MSIAfterburnerNET.CM.Interop;
-using MSIAfterburnerNET.Common.Exceptions;
-using System;
+﻿using System;
 using System.Text;
+using JetBrains.Annotations;
+using MSIAfterburnerNET.CM.Interop;
+using MSIAfterburnerNET.Common.Exceptions;
 
-namespace MSIAfterburnerNET.CM
-{
-    public class ControlMemoryHeader
-    {
-        public MACM_SHARED_MEMORY_HEADER NativeHeader;
+namespace MSIAfterburnerNET.CM;
 
-        public ControlMemoryHeader()
-        {
-        }
+[PublicAPI]
+public class ControlMemoryHeader {
+  public MACM_SHARED_MEMORY_HEADER nativeHeader;
 
-        public ControlMemoryHeader(MACM_SHARED_MEMORY_HEADER header)
-        {
-            this.NativeHeader = header;
-        }
+  public ControlMemoryHeader() { }
 
-        public uint Signature => this.NativeHeader.signature;
-        public uint Version => this.NativeHeader.version;
-        public uint HeaderSize => this.NativeHeader.headerSize;
-        public uint GpuEntryCount => this.NativeHeader.gpuEntryCount;
-        public uint GpuEntrySize => this.NativeHeader.gpuEntrySize;
-        public uint MasterGpu => this.NativeHeader.masterGpu;
-        public MACM_SHARED_MEMORY_FLAG Flags => this.NativeHeader.flags;
-        public DateTime Time => new DateTime(1970, 1, 1).AddSeconds(this.NativeHeader.time).ToLocalTime();
+  public ControlMemoryHeader(MACM_SHARED_MEMORY_HEADER header) { nativeHeader = header; }
 
-        public MACM_SHARED_MEMORY_COMMAND Command
-        {
-            get { return this.NativeHeader.command; }
-            internal set { this.NativeHeader.command = value; }
-        }
+  public uint Signature => nativeHeader.signature;
+  public uint Version => nativeHeader.version;
+  public uint HeaderSize => nativeHeader.headerSize;
+  public uint GpuEntryCount => nativeHeader.gpuEntryCount;
+  public uint GpuEntrySize => nativeHeader.gpuEntrySize;
+  public uint MasterGpu => nativeHeader.masterGpu;
+  public MACM_SHARED_MEMORY_FLAG Flags => nativeHeader.flags;
+  public DateTime Time => new DateTime(1970, 1, 1).AddSeconds(nativeHeader.time).ToLocalTime();
 
-        public string GetSignatureString()
-        {
-            char[] charArray = Encoding.ASCII.GetString(BitConverter.GetBytes(this.Signature)).ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
-        }
+  public MACM_SHARED_MEMORY_COMMAND Command { get => nativeHeader.command; internal set => nativeHeader.command = value; }
 
-        public string GetVersionString()
-        {
-            return $"{this.Version >> 16}.{(short)this.Version}";
-        }
+  public string GetSignatureString() {
+    var charArray = Encoding.ASCII.GetString(BitConverter.GetBytes(Signature)).ToCharArray();
+    Array.Reverse(charArray);
+    return new string(charArray);
+  }
 
-        internal void Validate()
-        {
-            if (this.GetSignatureString() != "MACM")
-            {
-                if (this.Signature == 57005U)
-                    throw new DeadSharedMemoryException();
-                throw new InvalidSharedMemoryException();
-            }
-            if (this.Version < 131073U)
-                throw new UnsupportedSharedMemoryVersionException();
-        }
+  public string GetVersionString() { return $"{Version >> 16}.{(short) Version}"; }
 
-        public override string ToString()
-        {
-            try
-            {
-                return "Signature = " + this.GetSignatureString() +
-                    ";Version = " + this.GetVersionString() +
-                    ";HeaderSize = " + this.HeaderSize +
-                    ";GpuEntryCount = " + this.GpuEntryCount +
-                    ";GpuEntrySize = " + this.GpuEntrySize +
-                    ";MasterGpu = " + this.MasterGpu +
-                    ";Flags = " + this.Flags.ToString() +
-                    ";Time = " + this.Time.ToString("hh:mm:ss MMM-dd-yyyy") +
-                    ";Command = " + this.Command.ToString();
-            }
-            catch
-            {
-                return base.ToString();
-            }
-        }
+  internal void Validate() {
+    if (GetSignatureString() != "MACM") {
+      if (Signature == 57005U) throw new DeadSharedMemoryException();
+
+      throw new InvalidSharedMemoryException();
     }
+
+    if (Version < 131073U) throw new UnsupportedSharedMemoryVersionException();
+  }
+
+  public override string ToString() {
+    try {
+      return "Signature = " +
+             GetSignatureString() +
+             ";Version = " +
+             GetVersionString() +
+             ";HeaderSize = " +
+             HeaderSize +
+             ";GpuEntryCount = " +
+             GpuEntryCount +
+             ";GpuEntrySize = " +
+             GpuEntrySize +
+             ";MasterGpu = " +
+             MasterGpu +
+             ";Flags = " +
+             Flags +
+             ";Time = " +
+             Time.ToString("hh:mm:ss MMM-dd-yyyy") +
+             ";Command = " +
+             Command;
+    }
+    catch {
+      return base.ToString();
+    }
+  }
 }

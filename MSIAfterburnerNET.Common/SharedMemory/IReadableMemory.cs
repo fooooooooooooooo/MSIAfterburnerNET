@@ -1,13 +1,5 @@
 ﻿using System;
 
-namespace MSIAfterburnerNET.Common.SharedMemory
-{
-    public interface IReadableMemory : IDisposable
-    {
-        object Read(long offset);
+namespace MSIAfterburnerNET.Common.SharedMemory;
 
-        object Read(long offset, long size);
-
-        int Read(byte[] buffer, int bytesToRead, long offset);
-    }
-}
+public interface IReadableMemory : IDisposable { }

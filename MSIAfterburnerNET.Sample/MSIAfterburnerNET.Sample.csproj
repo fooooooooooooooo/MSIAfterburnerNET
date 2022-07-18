@@ -38,8 +38,8 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <ApplicationIcon />
-    <StartupObject />
+    <ApplicationIcon/>
+    <StartupObject/>
   </PropertyGroup>
 
   <!-- Build Configurations -->
@@ -63,11 +63,11 @@
 
   <!-- Project Files -->
   <ItemGroup>
-    <None Update="app.config" />
+    <None Update="app.config"/>
   </ItemGroup>
 
   <!-- REFERENCES -->
   <ItemGroup>
-    <ProjectReference Include="..\MSIAfterburnerNET.HM\MSIAfterburnerNET.HM.csproj" />
+    <ProjectReference Include="..\MSIAfterburnerNET.HM\MSIAfterburnerNET.HM.csproj"/>
   </ItemGroup>
 </Project>

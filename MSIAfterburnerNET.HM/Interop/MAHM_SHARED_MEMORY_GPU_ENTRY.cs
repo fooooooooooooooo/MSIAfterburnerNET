@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.HM.Interop
-{
-    [Serializable]
-    public struct MAHM_SHARED_MEMORY_GPU_ENTRY
-    {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] gpuId;
+namespace MSIAfterburnerNET.HM.Interop;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] family;
+[Serializable]
+[PublicAPI]
+public struct MAHM_SHARED_MEMORY_GPU_ENTRY {
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] gpuId;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] device;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] family;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] driver;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] device;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] BIOS;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] driver;
 
-        public uint memAmount;
-    }
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] bios;
+
+  public uint memAmount;
 }

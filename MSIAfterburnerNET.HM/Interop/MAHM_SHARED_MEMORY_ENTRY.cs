@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
-namespace MSIAfterburnerNET.HM.Interop
-{
-    [Serializable]
-    public struct MAHM_SHARED_MEMORY_ENTRY
-    {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] srcName;
+namespace MSIAfterburnerNET.HM.Interop;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] srcUnits;
+[Serializable]
+[PublicAPI]
+public struct MAHM_SHARED_MEMORY_ENTRY {
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] srcName;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] localizedSrcName;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] srcUnits;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] localizedSrcUnits;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] localizedSrcName;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
-        public char[] recommendedFormat;
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] localizedSrcUnits;
 
-        public float data;
-        public float minLimit;
-        public float maxLimit;
-        public MAHM_SHARED_MEMORY_ENTRY_FLAG flags;
-        public uint index;
-        public uint srcId;
-    }
+  [MarshalAs(UnmanagedType.ByValArray, SizeConst = 260)]
+  public char[] recommendedFormat;
+
+  public float data;
+  public float minLimit;
+  public float maxLimit;
+  public MAHM_SHARED_MEMORY_ENTRY_FLAG flags;
+  public uint index;
+  public uint srcId;
 }
